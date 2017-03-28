@@ -21,10 +21,16 @@
 .TeamsList {
     float: left;
     text-align: left;
+    width:200px;
+}
+
+#Teams-List{
+    height: 100%;
 }
 
 .TeamDetails {
     display: flex;
+    margin-left: 200px;
     padding: 15px;
 }
 
@@ -47,4 +53,17 @@
 
 td {
     width: 50px;
+}
+
+.PlayerAvatar{
+    height:25px;
+    width: 25px;
+}
+
+.PlayerList{
+    margin-left:200px;
+}
+
+#PlayerList{
+    text-align:left;
 }

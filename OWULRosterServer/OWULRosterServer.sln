@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OWULRosterServer", "OWULRosterServer\OWULRosterServer.csproj", "{7F70AA8A-F293-41FB-9612-3962670B3678}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OWULRosterMVC", "OWULRosterServer\OWULRosterMVC.csproj", "{7F70AA8A-F293-41FB-9612-3962670B3678}"
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "owulrosterweb", "..\owulrosterweb\", "{03924B6D-772F-4FBA-8F74-69A7F85921A7}"
 	ProjectSection(WebsiteProperties) = preProject

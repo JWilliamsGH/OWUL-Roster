@@ -8,10 +8,6 @@ class TeamsListItem extends Component {
         }
     }
 
-    componentWillMount() {
-        console.log("TeamsListItem mounted");
-    }
-
     GetTeamDetails(teamId)
     {
         this.props.GetTeamDetails(teamId);

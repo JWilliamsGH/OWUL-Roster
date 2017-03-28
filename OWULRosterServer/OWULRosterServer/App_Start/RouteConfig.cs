@@ -26,9 +26,15 @@ namespace OWULRosterServer
             );
 
             routes.MapRoute(
+                name: "All Players",
+                url: "Players",
+                defaults: new { controller = "Player", action = "GetPlayers" }
+            );
+
+            routes.MapRoute(
                 name: "Players on Team",
-                url: "Players/{teamId}",
-                defaults: new { controller = "Player", action = "GetPlayers", teamId = "teamId" }
+                url: "Players/TeamId/{teamId}",
+                defaults: new { controller = "Player", action = "GetTeamPlayers", teamId = "teamId" }
             );
 
             routes.MapRoute(
