@@ -16,7 +16,7 @@ class TeamDetails extends Component {
         let avatar = process.env.PUBLIC_URL + "/Images/" + (this.state.team.Avatar || "100px-Default.png");
 
         return (
-            <section id="Team-Details" className="TeamDetails">
+            <section id="Team-Details">
                 <span>
                     <img src={avatar} alt={this.state.team.Avatar} className="TeamAvatar" />
                     <span className="TeamName">{this.state.team.Name}</span>

@@ -85,6 +85,10 @@ class App extends Component {
         let playerList = '';
         if (this.state.showPlayers) {
             playerList = this.state.players.map(player => {
+
+                //TODO: Refactor - This should look like teamDetails above and just have one component in it and then
+                //the tr down below should be another component. That''s what should actually be in the .map function
+
                 let playerAvatar = process.env.PUBLIC_URL + "/Images/" + (player.Avatar || "100px-Default.png");
                 return (
                     <div key={player.PlayerId}>
