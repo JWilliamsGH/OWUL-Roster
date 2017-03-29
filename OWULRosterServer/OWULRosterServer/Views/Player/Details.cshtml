@@ -4,10 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Player Details</h2>
 
 <div>
-    <h4>PlayerModel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -31,16 +30,7 @@
         </dt>
 
         <dd>
-            @if (string.IsNullOrEmpty(@Html.DisplayFor(model => model.Avatar).ToString()))
-            {
-                // Use default image
-                <img style="height: 30px; width: 30px;" src=@Url.Content("~/Content/Images/100px-Default.png") ) alt=@Html.DisplayFor(model => model.Avatar) />
-            }
-            else
-            {
-                // Use Avatar image
-                <img style="height: 30px; width: 30px;" src=@Url.Content("~/Content/Images/" + @Html.DisplayFor(model => model.Avatar)) alt=@Html.DisplayFor(model => model.Avatar) />
-            }
+            @AvatarHelper.AvatarImage(@Html.DisplayFor(model => model.Avatar).ToString())
         </dd>
 
         <dt>

@@ -1,0 +1,123 @@
+﻿@model OWULRosterServer.Models.TeamModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Team Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Avatar)
+        </dt>
+
+        <dd>
+            @if (string.IsNullOrEmpty(@Html.DisplayFor(model => model.Avatar).ToString()))
+            {
+                // Use default image
+                <img style="height: 30px; width: 30px;" src=@Url.Content("~/Content/Images/100px-Default.png") ) alt=@Html.DisplayFor(model => model.Avatar) />
+            }
+            else
+            {
+                // Use Avatar image
+                <img style="height: 30px; width: 30px;" src=@Url.Content("~/Content/Images/" + @Html.DisplayFor(model => model.Avatar)) alt=@Html.DisplayFor(model => model.Avatar) />
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Wins)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Wins)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Losses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Losses)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ties)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ties)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Score)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Score)
+        </dd>
+
+    </dl>
+</div>
+<div>
+
+    <table class="table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Skill Rating
+            </th>
+            <th>
+                Average Kills
+            </th>
+            <th>
+                Average Deaths
+            </th>
+            <th>
+                Average Assists
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Players)
+        {
+            <tr>
+                <td style="vertical-align:middle;">
+                    @Html.ActionLink(@Url.Content(@Html.DisplayFor(modelItem => item.Name).ToString()), "Details", "Player", new { playerId = item.PlayerId }, null)
+                </td>
+                <td style="vertical-align:middle;">
+                    @Html.DisplayFor(modelItem => item.SkillRating)
+                </td>
+                <td style="vertical-align:middle;">
+                    @Html.DisplayFor(modelItem => item.AverageKills)
+                </td>
+                <td style="vertical-align:middle;">
+                    @Html.DisplayFor(modelItem => item.AverageDeaths)
+                </td>
+                <td style="vertical-align:middle;">
+                    @Html.DisplayFor(modelItem => item.AverageAssists)
+                </td>
+                <td style="vertical-align:middle;">
+                    @Html.ActionLink("Edit", "Edit", new { playerId = item.PlayerId }) |
+                    @Html.ActionLink("Delete", "Delete", new { playerId = item.PlayerId })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TeamId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

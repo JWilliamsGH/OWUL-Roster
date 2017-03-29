@@ -4,13 +4,12 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Edit Player</h2>
 
 <form action="" method="post" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Player</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.PlayerId)
@@ -34,17 +33,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Avatar, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @if (string.IsNullOrEmpty(@Html.DisplayFor(model => model.Avatar).ToString()))
-                {
-                    // Use default image
-                    <img style="height: 30px; width: 30px; float:left; margin-right:10px" src=@Url.Content("~/Content/Images/100px-Default.png") ) alt=@Html.DisplayFor(model => model.Avatar) />
-                }
-                else
-                {
-                    // Use Avatar image
-                    <img style="height: 30px; width: 30px; float:left; margin-right:10px" src=@Url.Content("~/Content/Images/" + @Html.DisplayFor(model => model.Avatar)) alt=@Html.DisplayFor(model => model.Avatar) />
-                }
-                <input type="file" class="single-line" style="height:30px;" name="AvatarImage" value="Browse" />
+                @AvatarHelper.AvatarImage(@Html.DisplayFor(model => model.Avatar).ToString())
+                <input type="file" style="height:30px;" name="AvatarImage" value="Browse" />
                 @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
             </div>
         </div>

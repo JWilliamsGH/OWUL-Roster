@@ -14,6 +14,12 @@ namespace OWULRosterServer
             #region MVC ROUTES
 
             routes.MapRoute(
+                name: "All Players",
+                url: "Player",
+                defaults: new { controller = "Player", action = "Index" }
+            );
+
+            routes.MapRoute(
                 name: "Players on Team",
                 url: "Player/TeamId/{teamId}",
                 defaults: new { controller = "Player", action = "Index", teamId = "teamId" }
@@ -44,19 +50,19 @@ namespace OWULRosterServer
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "All Teams",
+                name: "API All Teams",
                 url: "API/Teams",
                 defaults: new { controller = "Team", action = "GetTeams" }
             );
 
             routes.MapRoute(
-                name: "Team Details",
+                name: "API Team Details",
                 url: "API/Teams/{teamId}",
                 defaults: new { controller = "Team", action = "GetTeamDetails", teamId = "teamId" }
             );
 
             routes.MapRoute(
-                name: "All Players",
+                name: "API All Players",
                 url: "API/Players",
                 defaults: new { controller = "Player", action = "GetPlayers" }
             );

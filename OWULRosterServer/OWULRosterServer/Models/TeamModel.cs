@@ -32,5 +32,7 @@ namespace OWULRosterServer.Models
 
         [Range(-30, 30, ErrorMessage = "Score must be between -30 and 30 for the season.")]
         public int Score { get; set; }
+
+        public IEnumerable<TeamDetailsPlayerModel> Players { get; set; }
     }
 }

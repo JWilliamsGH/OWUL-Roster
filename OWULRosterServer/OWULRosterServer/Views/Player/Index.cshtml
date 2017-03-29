@@ -4,11 +4,12 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Player Roster</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
 <table class="table">
     <tr>
         <th>
@@ -41,16 +42,7 @@
 @foreach (var item in Model) {
     <tr>
         <td style="vertical-align:middle;">
-            @if (string.IsNullOrEmpty(@Html.DisplayFor(modelItem => item.Avatar).ToString()))
-            {
-                // Use default image
-                <img style="height: 30px; width: 30px;" src=@Url.Content("~/Content/Images/100px-Default.png") ) alt=@Html.DisplayFor(modelItem => item.Avatar) />
-            }
-            else
-            {
-                // Use Avatar image
-                <img style="height: 30px; width: 30px;" src=@Url.Content("~/Content/Images/" + @Html.DisplayFor(modelItem => item.Avatar)) alt=@Html.DisplayFor(modelItem => item.Avatar) />
-            }
+            @AvatarHelper.AvatarImage(@Html.DisplayFor(model => item.Avatar).ToString())
         </td>
         <td style="vertical-align:middle;">
             @Html.DisplayFor(modelItem => item.Name)

@@ -1,13 +1,14 @@
-﻿@model OWULRosterServer.Models.PlayerModel
+﻿@model OWULRosterServer.Models.TeamModel
 
 @{
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete Player</h2>
+<h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
+    <h4>TeamModel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,14 +20,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.BNetTag)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BNetTag)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Avatar)
         </dt>
 
@@ -35,43 +28,35 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TeamName)
+            @Html.DisplayNameFor(model => model.Wins)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TeamName)
+            @Html.DisplayFor(model => model.Wins)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SkillRating)
+            @Html.DisplayNameFor(model => model.Losses)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SkillRating)
+            @Html.DisplayFor(model => model.Losses)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AverageKills)
+            @Html.DisplayNameFor(model => model.Ties)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AverageKills)
+            @Html.DisplayFor(model => model.Ties)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AverageDeaths)
+            @Html.DisplayNameFor(model => model.Score)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AverageDeaths)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AverageAssists)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AverageAssists)
+            @Html.DisplayFor(model => model.Score)
         </dd>
 
     </dl>
