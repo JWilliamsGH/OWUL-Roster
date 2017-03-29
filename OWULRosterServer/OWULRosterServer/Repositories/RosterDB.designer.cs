@@ -559,7 +559,7 @@ namespace OWULRosterServer.Repositories
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Team_Player", Storage="_Team", ThisKey="TeamId", OtherKey="TeamId", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Team_Player", Storage="_Team", ThisKey="TeamId", OtherKey="TeamId", IsForeignKey=true, DeleteRule="SET DEFAULT")]
 		public Team Team
 		{
 			get

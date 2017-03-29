@@ -39,7 +39,14 @@
         </dt>
 
         <dd>
-            @Html.ActionLink(HttpUtility.HtmlDecode(@Html.DisplayFor(model => model.TeamName).ToString()), "Details", "Team", new { teamId = Model.TeamId }, null)
+            @if (string.IsNullOrEmpty(string.Empty + @Html.DisplayFor(model => model.TeamName)))
+            {
+                @Html.DisplayFor(model => model.TeamName)
+            }
+            else
+            {
+                @Html.ActionLink(HttpUtility.HtmlDecode(@Html.DisplayFor(model => model.TeamName).ToString()), "Details", "Team", new { teamId = Model.TeamId }, null)
+            }
         </dd>
 
         <dt>
@@ -76,7 +83,8 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

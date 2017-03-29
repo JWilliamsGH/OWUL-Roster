@@ -39,7 +39,14 @@
                 @AvatarHelper.AvatarImage(@Html.DisplayFor(model => item.Avatar).ToString())
             </td>
             <td style="vertical-align:middle;">
-                @Html.ActionLink(HttpUtility.HtmlDecode(@Html.DisplayFor(modelItem => item.Name).ToString()), "Details", "Team", new { teamId = item.TeamId }, null)
+                @if (string.IsNullOrEmpty(string.Empty + @Html.DisplayFor(modelItem => item.Name)))
+                {
+                    @Html.DisplayFor(modelItem => item.Name)
+                }
+                else
+                {
+                    @Html.ActionLink(HttpUtility.HtmlDecode(@Html.DisplayFor(modelItem => item.Name).ToString()), "Details", "Team", new { teamId = item.TeamId }, null)
+                }
             </td>
             <td style="vertical-align:middle;">
                 @Html.DisplayFor(modelItem => item.Wins)

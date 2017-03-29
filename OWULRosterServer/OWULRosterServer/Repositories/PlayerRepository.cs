@@ -26,7 +26,7 @@ namespace OWULRosterServer.Repositories
                                AverageKills = p.AverageKills,
                                AverageDeaths = p.AverageDeaths,
                                AverageAssists = p.AverageAssists,
-                               TeamId = p.TeamId.Value
+                               TeamId = p.TeamId
                            });
             return players;
         }
@@ -60,7 +60,7 @@ namespace OWULRosterServer.Repositories
             {
                 Text = x.Name,
                 Value = x.TeamId.ToString(),
-                Selected = (x.TeamId == model.TeamId)
+                Selected = (x.TeamId == (model.TeamId ?? 0))
             });
         }
 

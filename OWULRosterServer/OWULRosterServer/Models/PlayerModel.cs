@@ -14,7 +14,7 @@ namespace OWULRosterServer.Models
         public int PlayerId { get; set; }
 
         [DisplayName("Team")]
-        public int TeamId { get; set; }
+        public int? TeamId { get; set; }
 
         [Required]
         [MaxLength(100)]

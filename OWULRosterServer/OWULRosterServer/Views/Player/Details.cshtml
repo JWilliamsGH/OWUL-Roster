@@ -38,7 +38,14 @@
         </dt>
 
         <dd>
-            @Html.ActionLink(@Url.Content(@Html.DisplayFor(model => model.TeamName).ToString()), "Details", "Team", new { teamId = Model.TeamId }, null)
+            @if (string.IsNullOrEmpty(string.Empty + @Html.DisplayFor(model => model.TeamName)))
+            {
+                @Html.DisplayFor(model => model.TeamName)
+            }
+            else
+            {
+                @Html.ActionLink(@Url.Content(@Html.DisplayFor(model => model.TeamName).ToString()), "Details", "Team", new { teamId = Model.TeamId }, null)
+            }
         </dd>
 
         <dt>

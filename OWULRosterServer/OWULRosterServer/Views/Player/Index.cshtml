@@ -52,7 +52,14 @@
                 @Html.DisplayFor(modelItem => item.BNetTag)
             </td>
             <td style="vertical-align:middle;">
-                @Html.ActionLink(HttpUtility.HtmlDecode(@Html.DisplayFor(modelItem => item.TeamName).ToString()), "Details", "Team", new { teamId = item.TeamId }, null)
+                @if (string.IsNullOrEmpty(string.Empty + @Html.DisplayFor(modelItem => item.TeamName)))
+                {
+                    @Html.DisplayFor(modelItem => item.TeamName)
+                }
+                else
+                {
+                    @Html.ActionLink(HttpUtility.HtmlDecode(@Html.DisplayFor(modelItem => item.TeamName).ToString()), "Details", "Team", new { teamId = item.TeamId }, null)
+                }
             </td>
             <td style="vertical-align:middle;">
                 @Html.DisplayFor(modelItem => item.SkillRating)
