@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OWULRosterServer.Models
+namespace OWULRosterServer.Repositories
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;

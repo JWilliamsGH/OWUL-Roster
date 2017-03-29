@@ -35,25 +35,25 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            <td style="vertical-align:middle;">
                 @AvatarHelper.AvatarImage(@Html.DisplayFor(model => item.Avatar).ToString())
             </td>
-            <td>
+            <td style="vertical-align:middle;">
                 @Html.ActionLink(HttpUtility.HtmlDecode(@Html.DisplayFor(modelItem => item.Name).ToString()), "Details", "Team", new { teamId = item.TeamId }, null)
             </td>
-            <td>
+            <td style="vertical-align:middle;">
                 @Html.DisplayFor(modelItem => item.Wins)
             </td>
-            <td>
+            <td style="vertical-align:middle;">
                 @Html.DisplayFor(modelItem => item.Losses)
             </td>
-            <td>
+            <td style="vertical-align:middle;">
                 @Html.DisplayFor(modelItem => item.Ties)
             </td>
-            <td>
+            <td style="vertical-align:middle;">
                 @Html.DisplayFor(modelItem => item.Score)
             </td>
-            <td>
+            <td style="vertical-align:middle;">
                 @Html.ActionLink("Edit", "Edit", new { teamId = item.TeamId }) |
                 @Html.ActionLink("Delete", "Delete", new { teamId = item.TeamId })
             </td>

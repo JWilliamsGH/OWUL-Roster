@@ -1,10 +1,7 @@
-﻿using Newtonsoft.Json;
-using OWULRosterServer.Models;
-using OWULRosterServer.Utils;
+﻿using OWULRosterServer.Models;
+using OWULRosterServer.Repositories;
 using System;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
 
@@ -16,46 +13,14 @@ namespace OWULRoster.Controllers
 
         public ActionResult Index(int? teamId)
         {
-            var context = new RosterDBDataContext();
-            var players = (from p in context.Players
-                           where teamId == null || p.TeamId == teamId
-                           orderby p.PlayerId
-                           select new PlayerModel()
-                           {
-                               PlayerId = p.PlayerId,
-                               Name = p.Name,
-                               BNetTag = p.BNetTag,
-                               Avatar = p.Avatar,
-                               TeamName = p.Team.Name,
-                               SkillRating = p.SkillRating,
-                               AverageKills = p.AverageKills,
-                               AverageDeaths = p.AverageDeaths,
-                               AverageAssists = p.AverageAssists,
-                               TeamId = p.TeamId.Value
-                           }).Take(100).ToArray();
-
+            // If this were larger, we'd need pagination
+            var players = PlayerRepository.GetPlayers(teamId).Take(100).ToList();
             return View(players);
         }
 
         public ActionResult Details(int playerId)
         {
-            var context = new RosterDBDataContext();
-            var player = (from p in context.Players
-                          where p.PlayerId == playerId
-                          select new PlayerModel()
-                          {
-                              PlayerId = p.PlayerId,
-                              Name = p.Name,
-                              BNetTag = p.BNetTag,
-                              Avatar = p.Avatar,
-                              TeamName = p.Team.Name,
-                              SkillRating = p.SkillRating,
-                              AverageKills = p.AverageKills,
-                              AverageDeaths = p.AverageDeaths,
-                              AverageAssists = p.AverageAssists,
-                              TeamId = p.TeamId.Value
-                          }).SingleOrDefault();
-
+            var player = PlayerRepository.GetPlayerDetails(playerId).SingleOrDefault();
             return View(player);
         }
 
@@ -69,27 +34,12 @@ namespace OWULRoster.Controllers
         [HttpPost]
         public ActionResult Create(PlayerModel model)
         {
-            var context = new RosterDBDataContext();
             if (ModelState.IsValid)
             {
                 try
                 {
                     GetUploadedImage(model);
-                    var player = new Player()
-                    {
-                        PlayerId = model.PlayerId,
-                        Name = model.Name,
-                        BNetTag = model.BNetTag,
-                        Avatar = model.Avatar,
-                        TeamId = model.TeamId,
-                        SkillRating = model.SkillRating,
-                        AverageKills = model.AverageKills,
-                        AverageDeaths = model.AverageDeaths,
-                        AverageAssists = model.AverageAssists
-                    };
-
-                    context.Players.InsertOnSubmit(player);
-                    context.SubmitChanges();
+                    PlayerRepository.InsertPlayer(model);
                     return RedirectToAction("Index");
                 }
                 catch
@@ -102,22 +52,7 @@ namespace OWULRoster.Controllers
 
         public ActionResult Edit(int playerId)
         {
-            var context = new RosterDBDataContext();
-            var player = (from p in context.Players
-                          where p.PlayerId == playerId
-                          select new PlayerModel()
-                          {
-                              PlayerId = p.PlayerId,
-                              Name = p.Name,
-                              BNetTag = p.BNetTag,
-                              Avatar = p.Avatar,
-                              TeamName = p.Team.Name,
-                              SkillRating = p.SkillRating,
-                              AverageKills = p.AverageKills,
-                              AverageDeaths = p.AverageDeaths,
-                              AverageAssists = p.AverageAssists
-                          }).SingleOrDefault();
-
+            var player = PlayerRepository.GetPlayerDetails(playerId).SingleOrDefault();
             PopulateTeamsSelect(player);
             return View(player);
         }
@@ -125,22 +60,12 @@ namespace OWULRoster.Controllers
         [HttpPost]
         public ActionResult Edit(PlayerModel model)
         {
-            var context = new RosterDBDataContext();
             if (ModelState.IsValid)
             {
                 try
                 {
                     GetUploadedImage(model);
-                    var player = context.Players.Where(p => p.PlayerId == model.PlayerId).Single<Player>();
-                    player.Name = model.Name;
-                    player.BNetTag = model.BNetTag;
-                    if(!string.IsNullOrEmpty(model.Avatar)) player.Avatar = model.Avatar;
-                    player.TeamId = model.TeamId;
-                    player.SkillRating = model.SkillRating;
-                    player.AverageKills = model.AverageKills;
-                    player.AverageDeaths = model.AverageDeaths;
-                    player.AverageAssists = model.AverageAssists;
-                    context.SubmitChanges();
+                    PlayerRepository.UpdatePlayer(model);
                     return RedirectToAction("Index");
                 }
                 catch
@@ -153,35 +78,16 @@ namespace OWULRoster.Controllers
 
         public ActionResult Delete(int playerId)
         {
-            var context = new RosterDBDataContext();
-            var player = (from p in context.Players
-                          where p.PlayerId == playerId
-                          select new PlayerModel()
-                          {
-                              PlayerId = p.PlayerId,
-                              Name = p.Name,
-                              BNetTag = p.BNetTag,
-                              Avatar = p.Avatar,
-                              TeamName = p.Team.Name,
-                              SkillRating = p.SkillRating,
-                              AverageKills = p.AverageKills,
-                              AverageDeaths = p.AverageDeaths,
-                              AverageAssists = p.AverageAssists,
-                              TeamId = p.TeamId.Value
-                          }).SingleOrDefault();
-
+            var player = PlayerRepository.GetPlayerDetails(playerId).SingleOrDefault();
             return View(player);
         }
 
         [HttpPost]
         public ActionResult Delete(PlayerModel model)
         {
-            var context = new RosterDBDataContext();
             try
             {
-                var player = context.Players.Where(p => p.PlayerId == model.PlayerId).Single<Player>();
-                context.Players.DeleteOnSubmit(player);
-                context.SubmitChanges();
+                PlayerRepository.DeletePlayer(model);
                 return RedirectToAction("Index");
             }
             catch
@@ -197,54 +103,25 @@ namespace OWULRoster.Controllers
         #endregion
 
         #region API METHODS
-
+        
         [HttpGet]
         public JsonResult GetPlayers()
         {
-            var context = new RosterDBDataContext();
-            var playersResults = (from p in context.Players
-                                  orderby p.PlayerId
-                                  select new
-                                  {
-                                      PlayerId = p.PlayerId,
-                                      Name = p.Name,
-                                      BNetTag = p.BNetTag,
-                                      Avatar = p.Avatar,
-                                      SkillRating = p.SkillRating,
-                                      AverageKills = p.AverageKills,
-                                      AverageDeaths = p.AverageDeaths,
-                                      AverageAssists = p.AverageAssists
-                                  }).Take(100).ToArray();
-
-            return Json(new { players = playersResults }, JsonRequestBehavior.AllowGet);
+            var players = PlayerRepository.GetPlayers(null).Take(100).ToArray();
+            return Json(new { players = players }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public JsonResult GetTeamPlayers(int TeamId)
         {
-            var context = new RosterDBDataContext();
-            var playersResults = (from p in context.Players
-                                  where p.TeamId == TeamId
-                                  orderby p.PlayerId
-                                  select new
-                                  {
-                                      PlayerId = p.PlayerId,
-                                      Name = p.Name,
-                                      BNetTag = p.BNetTag,
-                                      Avatar = p.Avatar,
-                                      SkillRating = p.SkillRating,
-                                      AverageKills = p.AverageKills,
-                                      AverageDeaths = p.AverageDeaths,
-                                      AverageAssists = p.AverageAssists
-                                  }).Take(100).ToArray();
-
-            return Json(new { players = playersResults }, JsonRequestBehavior.AllowGet);
+            var players = PlayerRepository.GetPlayers(TeamId).Take(100).ToArray();
+            return Json(new { players = players }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public JsonResult SavePlayer()
         {
-            return null;
+            throw new NotImplementedException();
         }
 
         #endregion
@@ -253,14 +130,7 @@ namespace OWULRoster.Controllers
 
         private void PopulateTeamsSelect(PlayerModel model)
         {
-            var context = new RosterDBDataContext();
-            model.Teams = context.Teams.AsQueryable<Team>().Select(x =>
-            new SelectListItem()
-            {
-                Text = x.Name,
-                Value = x.TeamId.ToString(),
-                Selected = (x.TeamId == model.TeamId)
-            });
+            PlayerRepository.GetTeamSelectList(model);
         }
 
         private static void GetUploadedImage(PlayerModel model)

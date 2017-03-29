@@ -167,7 +167,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\PlayerModel.cs" />
-    <Compile Include="Models\RosterDB.designer.cs">
+    <Compile Include="Repositories\TeamRepository.cs" />
+    <Compile Include="Repositories\PlayerRepository.cs" />
+    <Compile Include="Repositories\RosterDB.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RosterDB.dbml</DependentUpon>
@@ -180,7 +182,7 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Models\RosterDB.dbml">
+    <Content Include="Repositories\RosterDB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>RosterDB.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
@@ -204,7 +206,7 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Models\RosterDB.dbml.layout">
+    <None Include="Repositories\RosterDB.dbml.layout">
       <DependentUpon>RosterDB.dbml</DependentUpon>
     </None>
   </ItemGroup>

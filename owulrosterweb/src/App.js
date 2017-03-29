@@ -35,10 +35,11 @@ class App extends Component {
 
     GetTeams() {
         $.ajax({
-            url: "http://localhost:9001/Teams",
+            url: "http://localhost:9001/API/Teams",
             dataType: "json",
             cache: false,
             success: function (data) {
+                console.log(data);
                 this.setState({ teams: data.teams });
             }.bind(this),
             error: function (xhr, status, error) {
@@ -49,7 +50,7 @@ class App extends Component {
 
     GetTeamDetails(teamId) {
         $.ajax({
-            url: "http://localhost:9001/Teams/" + teamId,
+            url: "http://localhost:9001/API/Teams/" + teamId,
             dataType: "json",
             cache: false,
             success: function (data) {
@@ -61,10 +62,11 @@ class App extends Component {
         });
 
         $.ajax({
-            url: "http://localhost:9001/Players/TeamId/" + teamId,
+            url: "http://localhost:9001/API/Players/TeamId/" + teamId,
             dataType: "json",
             cache: false,
             success: function (data) {
+                console.log(data);
                 this.setState({ showPlayers: true, players: data.players });
             }.bind(this),
             error: function (xhr, status, err) {

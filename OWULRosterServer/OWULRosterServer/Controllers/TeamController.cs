@@ -6,6 +6,7 @@ using OWULRosterServer.Utils;
 using System.Collections.Generic;
 using System.Web.Helpers;
 using System;
+using OWULRosterServer.Repositories;
 
 namespace OWULRoster.Controllers
 {
@@ -15,20 +16,7 @@ namespace OWULRoster.Controllers
 
         public ActionResult Index()
         {
-            var context = new RosterDBDataContext();
-            var teams = (from t in context.Teams
-                         orderby t.TeamId
-                         select new TeamModel
-                         {
-                             TeamId = t.TeamId,
-                             Name = t.Name,
-                             Avatar = t.Avatar,
-                             Score = t.Score,
-                             Wins = t.Wins,
-                             Losses = t.Losses,
-                             Ties = t.Ties
-                         }).ToList();
-
+            var teams = TeamRepository.GetTeams().ToList();
             return View(teams);
         }
 
@@ -41,23 +29,12 @@ namespace OWULRoster.Controllers
         [HttpPost]
         public ActionResult Create(TeamModel model)
         {
-            var context = new RosterDBDataContext();
             if (ModelState.IsValid)
             {
                 try
                 {
                     GetUploadedImage(model);
-                    var team = new Team()
-                    {
-                        Name = model.Name,
-                        Avatar = model.Avatar,
-                        Wins = model.Wins,
-                        Losses = model.Losses,
-                        Ties = model.Ties,
-                        Score = model.Score
-                    };
-                    context.Teams.InsertOnSubmit(team);
-                    context.SubmitChanges();
+                    TeamRepository.InsertTeam(model);
                     return RedirectToAction("Index");
                 }
                 catch
@@ -71,70 +48,25 @@ namespace OWULRoster.Controllers
 
         public ActionResult Details(int teamId)
         {
-            var context = new RosterDBDataContext();
-            var team = (from t in context.Teams
-                        where t.TeamId == teamId
-                        select new TeamModel()
-                        {
-                            TeamId = t.TeamId,
-                            Name = t.Name,
-                            Avatar = t.Avatar,
-                            Score = t.Score,
-                            Wins = t.Wins,
-                            Losses = t.Losses,
-                            Ties = t.Ties,
-                            Players = (from p in context.Players
-                                       where p.TeamId == t.TeamId
-                                       select new TeamDetailsPlayerModel()
-                                       {
-                                           PlayerId = p.PlayerId,
-                                           Name = p.Name,
-                                           SkillRating = p.SkillRating,
-                                           AverageKills = p.AverageKills,
-                                           AverageDeaths = p.AverageDeaths,
-                                           AverageAssists = p.AverageAssists
-                                       })
-                        }).SingleOrDefault();
-
+            var team = TeamRepository.GetTeamDetailsWithPlayers(teamId).SingleOrDefault();
             return View(team);
         }
 
         public ActionResult Edit(int teamId)
         {
-            var context = new RosterDBDataContext();
-            var team = (from t in context.Teams
-                        where t.TeamId == teamId
-                        select new TeamModel()
-                        {
-                            TeamId = t.TeamId,
-                            Name = t.Name,
-                            Avatar = t.Avatar,
-                            Score = t.Score,
-                            Wins = t.Wins,
-                            Losses = t.Losses,
-                            Ties = t.Ties
-                        }).SingleOrDefault();
-
+            var team = TeamRepository.GetTeamDetails(teamId).SingleOrDefault();
             return View(team);
         }
 
         [HttpPost]
         public ActionResult Edit(TeamModel model)
         {
-            var context = new RosterDBDataContext();
             if (ModelState.IsValid)
             {
                 try
                 {
                     GetUploadedImage(model);
-                    var team = context.Teams.Where(p => p.TeamId == model.TeamId).Single<Team>();
-                    team.Name = model.Name;
-                    if (!string.IsNullOrEmpty(model.Avatar)) team.Avatar = model.Avatar;
-                    team.Score = model.Score;
-                    team.Wins = model.Wins;
-                    team.Losses = model.Losses;
-                    team.Ties = model.Ties;
-                    context.SubmitChanges();
+                    TeamRepository.UpdateTeam(model);
                     return RedirectToAction("Index");
                 }
                 catch
@@ -147,35 +79,19 @@ namespace OWULRoster.Controllers
 
         public ActionResult Delete(int teamId)
         {
-            var context = new RosterDBDataContext();
-            var team = (from t in context.Teams
-                        where t.TeamId == teamId
-                        select new TeamModel()
-                        {
-                            TeamId = t.TeamId,
-                            Name = t.Name,
-                            Avatar = t.Avatar,
-                            Score = t.Score,
-                            Wins = t.Wins,
-                            Losses = t.Losses,
-                            Ties = t.Ties
-                        }).SingleOrDefault();
-
+            var team = TeamRepository.GetTeamDetails(teamId).SingleOrDefault();
             return View(team);
         }
 
         [HttpPost]
         public ActionResult Delete(TeamModel model)
         {
-            var context = new RosterDBDataContext();
             try
             {
-                var team = context.Teams.Where(p => p.TeamId == model.TeamId).Single<Team>();
-                context.Teams.DeleteOnSubmit(team);
-                context.SubmitChanges();
+                TeamRepository.DeleteTeam(model);
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
                 // This is a bit of a hack.
                 // The Delete POST is just passing in an 'int teamId' and nothing else but that is the signature for the GET method
@@ -191,35 +107,13 @@ namespace OWULRoster.Controllers
 
         public JsonResult GetTeams()
         {
-            var context = new RosterDBDataContext();
-            var teams = (from t in context.Teams
-                         orderby t.TeamId
-                         select new
-                         {
-                             TeamId = t.TeamId,
-                             Name = t.Name,
-                             Avatar = t.Avatar
-                         }).Take(100).ToList(); // TODO: A real world scenario would need pagination
-
+            var teams = TeamRepository.GetTeams().ToList(); // TODO: A real world scenario would need pagination
             return Json(new { teams = teams }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetTeamDetails(int teamId)
         {
-            var context = new RosterDBDataContext();
-            var team = (from t in context.Teams
-                        where t.TeamId == teamId
-                        select new
-                        {
-                            TeamId = t.TeamId,
-                            Name = t.Name,
-                            Avatar = t.Avatar,
-                            Score = t.Score,
-                            Wins = t.Wins,
-                            Losses = t.Losses,
-                            Ties = t.Ties
-                        }).FirstOrDefault();
-
+            var team = TeamRepository.GetTeamDetails(teamId).SingleOrDefault();
             return Json(new { team = team }, JsonRequestBehavior.AllowGet);
         }
 

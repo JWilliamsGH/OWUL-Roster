@@ -30,7 +30,7 @@ CREATE TABLE dbo.Player (
     PlayerId int IDENTITY(1,1),
 	CONSTRAINT [PK_PlayerId] PRIMARY KEY CLUSTERED (PlayerId ASC),
     TeamId int
-	CONSTRAINT [FK_Team_TeamId] REFERENCES dbo.Team(TeamId),
+	CONSTRAINT [FK_Team_TeamId] REFERENCES dbo.Team(TeamId) ON DELETE SET DEFAULT,
     Name varchar(100) NOT NULL,
     BNetTag varchar(100) NOT NULL,
     Avatar varchar(500),
