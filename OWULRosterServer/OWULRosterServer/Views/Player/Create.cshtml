@@ -6,10 +6,8 @@
 
 <h2>Create Player</h2>
 
-@using (Html.BeginForm("Create", "Player", new { enctype = "multipart/form-data" }))
-{
+<form action="" method="post" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(x => x.PlayerId)
 
     <div class="form-horizontal">
         <hr />
@@ -34,7 +32,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Avatar, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" class="single-line" style="height:30px;" name="AvatarImage" value="Browse" />
+                <input type="file" style="height:30px;" name="AvatarImage" value="Browse" />
                 @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -85,8 +83,7 @@
             </div>
         </div>
     </div>
-}
-
+</form>
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>

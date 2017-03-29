@@ -88,7 +88,9 @@
             <th>
                 Average Assists
             </th>
-            <th></th>
+            <th>
+                @Html.ActionLink("Add Player", "Create", "Player", null, null)
+            </th>
         </tr>
 
         @foreach (var item in Model.Players)
@@ -110,14 +112,14 @@
                     @Html.DisplayFor(modelItem => item.AverageAssists)
                 </td>
                 <td style="vertical-align:middle;">
-                    @Html.ActionLink("Edit", "Edit", new { playerId = item.PlayerId }) |
-                    @Html.ActionLink("Delete", "Delete", new { playerId = item.PlayerId })
+                    @Html.ActionLink("Edit", "Edit", "Player", new { playerId = item.PlayerId }, null) |
+                    @Html.ActionLink("Delete", "Delete", "Player", new { playerId = item.PlayerId }, null)
                 </td>
             </tr>
         }
     </table>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TeamId }) |
+    @Html.ActionLink("Edit", "Edit", new { teamId = Model.TeamId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

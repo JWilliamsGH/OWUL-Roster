@@ -30,7 +30,8 @@ namespace OWULRoster.Controllers
                                SkillRating = p.SkillRating,
                                AverageKills = p.AverageKills,
                                AverageDeaths = p.AverageDeaths,
-                               AverageAssists = p.AverageAssists
+                               AverageAssists = p.AverageAssists,
+                               TeamId = p.TeamId.Value
                            }).Take(100).ToArray();
 
             return View(players);
@@ -51,7 +52,8 @@ namespace OWULRoster.Controllers
                               SkillRating = p.SkillRating,
                               AverageKills = p.AverageKills,
                               AverageDeaths = p.AverageDeaths,
-                              AverageAssists = p.AverageAssists
+                              AverageAssists = p.AverageAssists,
+                              TeamId = p.TeamId.Value
                           }).SingleOrDefault();
 
             return View(player);

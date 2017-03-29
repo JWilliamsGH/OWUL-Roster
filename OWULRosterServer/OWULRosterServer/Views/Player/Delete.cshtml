@@ -39,7 +39,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TeamName)
+            @Html.ActionLink(@Url.Content(@Html.DisplayFor(model => model.TeamName).ToString()), "Details", "Team", new { teamId = Model.TeamId }, null)
         </dd>
 
         <dt>
