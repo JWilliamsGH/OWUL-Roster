@@ -3,6 +3,35 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Server is up and running</h2>
+<h2>Overwatch University League Roster</h2>
 
-<p>Open a command window and navigate to the owulrosterweb folder and type "npm start" to access the roster.</p>
+<p>
+    Hello. Thank you for taking the time to review this project. Before we get started, I'll warn you, this is the first time
+    I've really worked with MVC. I've mostly worked on WebForms projects. Some MVC maintenance here and there but not really
+    building anything out. There's a lot about this that I'd liked to have done better. I'm open to suggestions and hope to
+    get some good feedback. This project has been the most fun I've had coding since my time on the CoreMotives project.
+</p>
+<p>
+    Thank you.
+</p>
+<p>
+    You'll notice that there are two solutions. OWULRosterMVC is a pure MVC solution. That's the fully built out solution.
+    As long as you've run the SQL Script in the Scripts/SQL folder, you should be good to go. The other solution was my first
+    attempt at React. James told me that you guys use React for the front end with a .NET backend and I wanted to try that out.
+    It took longer than expected to get things set up and the learning curve didn't seem reasonable for the task at hand but
+    I'm including it anyway more as a proof of concept.
+</p>
+<p>
+    The Roster that you're looking at is for the lowest division of a new Overwatch league that started up this year. I entered
+    with a few friends and it seemed appropriate for this project.
+</p>
+<p>
+    To get started <strong>@Html.ActionLink("click here", "Index", "Team", null, null)</strong> to go to view the Teams.
+</p>
+<hr />
+<p>
+    Instructions for running the React site:<br />
+    Start up OWULRosterMVC which acts as an API.<br />
+    Open a command window and navigate to the owulrosterweb folder and type "npm start" to access the roster.<br />
+    The app should start running on localhost:3000
+</p>

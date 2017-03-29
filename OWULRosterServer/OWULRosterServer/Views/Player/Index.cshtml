@@ -46,13 +46,13 @@
                 @AvatarHelper.AvatarImage(@Html.DisplayFor(model => item.Avatar).ToString())
             </td>
             <td style="vertical-align:middle;">
-                @Html.ActionLink(@Url.Content(@Html.DisplayFor(modelItem => item.Name).ToString()), "Details", "Player", new { playerId = item.PlayerId }, null)
+                @Html.ActionLink(HttpUtility.HtmlDecode(@Html.DisplayFor(modelItem => item.Name).ToString()), "Details", "Player", new { playerId = item.PlayerId }, null)
             </td>
             <td style="vertical-align:middle;">
                 @Html.DisplayFor(modelItem => item.BNetTag)
             </td>
             <td style="vertical-align:middle;">
-                @Html.ActionLink(@Url.Content(@Html.DisplayFor(modelItem => item.TeamName).ToString()), "Details", "Team", new { teamId = item.TeamId }, null)
+                @Html.ActionLink(HttpUtility.HtmlDecode(@Html.DisplayFor(modelItem => item.TeamName).ToString()), "Details", "Team", new { teamId = item.TeamId }, null)
             </td>
             <td style="vertical-align:middle;">
                 @Html.DisplayFor(modelItem => item.SkillRating)

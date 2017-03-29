@@ -39,7 +39,7 @@
                 @AvatarHelper.AvatarImage(@Html.DisplayFor(model => item.Avatar).ToString())
             </td>
             <td>
-                @Html.ActionLink(@Url.Content(@Html.DisplayFor(modelItem => item.Name).ToString()), "Details", "Team", new { teamId = item.TeamId }, null)
+                @Html.ActionLink(HttpUtility.HtmlDecode(@Html.DisplayFor(modelItem => item.Name).ToString()), "Details", "Team", new { teamId = item.TeamId }, null)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Wins)
@@ -55,7 +55,6 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { teamId = item.TeamId }) |
-                @Html.ActionLink("Details", "Details", new { teamId = item.TeamId }) |
                 @Html.ActionLink("Delete", "Delete", new { teamId = item.TeamId })
             </td>
         </tr>
