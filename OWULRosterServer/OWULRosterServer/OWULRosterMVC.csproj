@@ -94,7 +94,40 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\100px-Default.png" />
+    <Content Include="Content\Images\100px-PI_Alien.png" />
+    <Content Include="Content\Images\100px-PI_Ana_Face.png" />
+    <Content Include="Content\Images\100px-PI_Anubis.png" />
+    <Content Include="Content\Images\100px-PI_Bao.png" />
+    <Content Include="Content\Images\100px-PI_Bastion_Face.png" />
+    <Content Include="Content\Images\100px-PI_Capsule.png" />
+    <Content Include="Content\Images\100px-PI_Cheers.png" />
+    <Content Include="Content\Images\100px-PI_Colossus.png" />
+    <Content Include="Content\Images\100px-PI_D.Va_Face.png" />
+    <Content Include="Content\Images\100px-PI_Genji_Face.png" />
+    <Content Include="Content\Images\100px-PI_Hanzo_Face.png" />
+    <Content Include="Content\Images\100px-PI_Junkrat_Face.png" />
+    <Content Include="Content\Images\100px-PI_Lucio_Face.png" />
+    <Content Include="Content\Images\100px-PI_McCree_Face.png" />
+    <Content Include="Content\Images\100px-PI_Mei_Face.png" />
+    <Content Include="Content\Images\100px-PI_Mercy_Face.png" />
+    <Content Include="Content\Images\100px-PI_Pharah_Face.png" />
+    <Content Include="Content\Images\100px-PI_Reaper_Emblem.png" />
+    <Content Include="Content\Images\100px-PI_Reaper_Face.png" />
+    <Content Include="Content\Images\100px-PI_Reaper_Soul.png" />
+    <Content Include="Content\Images\100px-PI_Reinhardt_Face.png" />
+    <Content Include="Content\Images\100px-PI_Roadhog_Face.png" />
+    <Content Include="Content\Images\100px-PI_S76_Face.png" />
+    <Content Include="Content\Images\100px-PI_Sombra_Face.png" />
+    <Content Include="Content\Images\100px-PI_Symmetra_Face.png" />
+    <Content Include="Content\Images\100px-PI_Torbjörn_Face.png" />
+    <Content Include="Content\Images\100px-PI_Tracer_Face.png" />
+    <Content Include="Content\Images\100px-PI_Widowmaker_Face.png" />
+    <Content Include="Content\Images\100px-PI_Winston_Face.png" />
+    <Content Include="Content\Images\100px-PI_Zarya_Face.png" />
+    <Content Include="Content\Images\100px-PI_Zenyatta_Face.png" />
     <Content Include="Content\Images\owul-logo.png" />
+    <Content Include="Content\Images\SL.png" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -103,10 +136,23 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\SQL\Roster.sql" />
     <Content Include="Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Team\Create.cshtml" />
+    <Content Include="Views\Team\Index.cshtml" />
+    <Content Include="Views\Player\Create.cshtml" />
+    <Content Include="Views\Player\Index.cshtml" />
+    <Content Include="Views\Player\Edit.cshtml" />
+    <Content Include="Views\Player\Details.cshtml" />
+    <Content Include="Views\Player\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -116,11 +162,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\PlayerModel.cs" />
     <Compile Include="Models\RosterDB.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RosterDB.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\TeamModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\JSONUtil.cs" />
   </ItemGroup>

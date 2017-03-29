@@ -1,0 +1,102 @@
+﻿@model OWULRosterServer.Models.PlayerModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form action="" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Player</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.PlayerId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BNetTag, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BNetTag, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BNetTag, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Avatar, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (string.IsNullOrEmpty(@Html.DisplayFor(model => model.Avatar).ToString()))
+                {
+                    // Use default image
+                    <img style="height: 30px; width: 30px; float:left; margin-right:10px" src=@Url.Content("~/Content/Images/100px-Default.png") ) alt=@Html.DisplayFor(model => model.Avatar) />
+                }
+                else
+                {
+                    // Use Avatar image
+                    <img style="height: 30px; width: 30px; float:left; margin-right:10px" src=@Url.Content("~/Content/Images/" + @Html.DisplayFor(model => model.Avatar)) alt=@Html.DisplayFor(model => model.Avatar) />
+                }
+                <input type="file" class="single-line" style="height:30px;" name="AvatarImage" value="Browse" />
+                @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Teams, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.TeamId, new SelectList(Model.Teams, "Value", "Text"), new { @class = "form-control dropdown single-line" })
+                @Html.ValidationMessageFor(model => model.TeamName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SkillRating, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SkillRating, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SkillRating, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AverageKills, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AverageKills, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AverageKills, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AverageDeaths, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AverageDeaths, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AverageDeaths, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AverageAssists, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AverageAssists, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AverageAssists, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -4,11 +4,11 @@
     <Type Name="Team">
       <Column Name="TeamId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Avatar" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="Wins" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Losses" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Ties" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Score" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Avatar" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Wins" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Losses" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Ties" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Score" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Team_Player" Member="Players" ThisKey="TeamId" OtherKey="TeamId" Type="Player" />
     </Type>
   </Table>
@@ -18,11 +18,11 @@
       <Column Name="TeamId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="BNetTag" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Avatar" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="SkillRating" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="AverageKills" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Column Name="AverageDeaths" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Column Name="AverageAssists" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="Avatar" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="SkillRating" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AverageKills" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
+      <Column Name="AverageDeaths" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
+      <Column Name="AverageAssists" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
       <Association Name="Team_Player" Member="Team" ThisKey="TeamId" OtherKey="TeamId" Type="Team" IsForeignKey="true" />
     </Type>
   </Table>

@@ -11,30 +11,24 @@ namespace OWULRosterServer
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-            routes.MapRoute(
-                name: "All Teams",
-                url: "Teams",
-                defaults: new { controller = "Team", action = "GetTeams" }
-            );
-
-            routes.MapRoute(
-                name: "Team Details",
-                url: "Teams/{teamId}",
-                defaults: new { controller = "Team", action = "GetTeamDetails", teamId = "teamId" }
-            );
-
-            routes.MapRoute(
-                name: "All Players",
-                url: "Players",
-                defaults: new { controller = "Player", action = "GetPlayers" }
-            );
+            #region MVC ROUTES
 
             routes.MapRoute(
                 name: "Players on Team",
-                url: "Players/TeamId/{teamId}",
-                defaults: new { controller = "Player", action = "GetTeamPlayers", teamId = "teamId" }
+                url: "Player/TeamId/{teamId}",
+                defaults: new { controller = "Player", action = "Index", teamId = "teamId" }
+            );
+
+            routes.MapRoute(
+                name: "Team Default",
+                url: "{controller}/{action}/{teamId}",
+                defaults: new { controller = "Home", action = "Index", teamId = "teamId" }
+            );
+
+            routes.MapRoute(
+                name: "Player Default",
+                url: "{controller}/{action}/{playerId}",
+                defaults: new { controller = "Home", action = "Index", playerId = "playerId" }
             );
 
             routes.MapRoute(
@@ -42,6 +36,40 @@ namespace OWULRosterServer
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            #endregion
+
+            #region API ROUTES
+
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapRoute(
+                name: "All Teams",
+                url: "API/Teams",
+                defaults: new { controller = "Team", action = "GetTeams" }
+            );
+
+            routes.MapRoute(
+                name: "Team Details",
+                url: "API/Teams/{teamId}",
+                defaults: new { controller = "Team", action = "GetTeamDetails", teamId = "teamId" }
+            );
+
+            routes.MapRoute(
+                name: "All Players",
+                url: "API/Players",
+                defaults: new { controller = "Player", action = "GetPlayers" }
+            );
+
+            routes.MapRoute(
+                name: "API Players on Team",
+                url: "API/Players/TeamId/{teamId}",
+                defaults: new { controller = "Player", action = "GetTeamPlayers", teamId = "teamId" }
+            );
+
+
+
+            #endregion
         }
     }
 }

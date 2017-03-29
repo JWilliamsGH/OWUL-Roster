@@ -97,13 +97,13 @@ namespace OWULRosterServer.Models
 		
 		private string _Avatar;
 		
-		private System.Nullable<int> _Wins;
+		private int _Wins;
 		
-		private System.Nullable<int> _Losses;
+		private int _Losses;
 		
-		private System.Nullable<int> _Ties;
+		private int _Ties;
 		
-		private System.Nullable<int> _Score;
+		private int _Score;
 		
 		private EntitySet<Player> _Players;
 		
@@ -117,13 +117,13 @@ namespace OWULRosterServer.Models
     partial void OnNameChanged();
     partial void OnAvatarChanging(string value);
     partial void OnAvatarChanged();
-    partial void OnWinsChanging(System.Nullable<int> value);
+    partial void OnWinsChanging(int value);
     partial void OnWinsChanged();
-    partial void OnLossesChanging(System.Nullable<int> value);
+    partial void OnLossesChanging(int value);
     partial void OnLossesChanged();
-    partial void OnTiesChanging(System.Nullable<int> value);
+    partial void OnTiesChanging(int value);
     partial void OnTiesChanged();
-    partial void OnScoreChanging(System.Nullable<int> value);
+    partial void OnScoreChanging(int value);
     partial void OnScoreChanged();
     #endregion
 		
@@ -173,7 +173,7 @@ namespace OWULRosterServer.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Avatar", DbType="VarChar(100)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Avatar", DbType="VarChar(500)")]
 		public string Avatar
 		{
 			get
@@ -193,8 +193,8 @@ namespace OWULRosterServer.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Wins", DbType="Int")]
-		public System.Nullable<int> Wins
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Wins", DbType="Int NOT NULL")]
+		public int Wins
 		{
 			get
 			{
@@ -213,8 +213,8 @@ namespace OWULRosterServer.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Losses", DbType="Int")]
-		public System.Nullable<int> Losses
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Losses", DbType="Int NOT NULL")]
+		public int Losses
 		{
 			get
 			{
@@ -233,8 +233,8 @@ namespace OWULRosterServer.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ties", DbType="Int")]
-		public System.Nullable<int> Ties
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ties", DbType="Int NOT NULL")]
+		public int Ties
 		{
 			get
 			{
@@ -253,8 +253,8 @@ namespace OWULRosterServer.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Score", DbType="Int")]
-		public System.Nullable<int> Score
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Score", DbType="Int NOT NULL")]
+		public int Score
 		{
 			get
 			{
@@ -335,13 +335,13 @@ namespace OWULRosterServer.Models
 		
 		private string _Avatar;
 		
-		private System.Nullable<int> _SkillRating;
+		private int _SkillRating;
 		
-		private System.Nullable<decimal> _AverageKills;
+		private decimal _AverageKills;
 		
-		private System.Nullable<decimal> _AverageDeaths;
+		private decimal _AverageDeaths;
 		
-		private System.Nullable<decimal> _AverageAssists;
+		private decimal _AverageAssists;
 		
 		private EntityRef<Team> _Team;
 		
@@ -359,13 +359,13 @@ namespace OWULRosterServer.Models
     partial void OnBNetTagChanged();
     partial void OnAvatarChanging(string value);
     partial void OnAvatarChanged();
-    partial void OnSkillRatingChanging(System.Nullable<int> value);
+    partial void OnSkillRatingChanging(int value);
     partial void OnSkillRatingChanged();
-    partial void OnAverageKillsChanging(System.Nullable<decimal> value);
+    partial void OnAverageKillsChanging(decimal value);
     partial void OnAverageKillsChanged();
-    partial void OnAverageDeathsChanging(System.Nullable<decimal> value);
+    partial void OnAverageDeathsChanging(decimal value);
     partial void OnAverageDeathsChanged();
-    partial void OnAverageAssistsChanging(System.Nullable<decimal> value);
+    partial void OnAverageAssistsChanging(decimal value);
     partial void OnAverageAssistsChanged();
     #endregion
 		
@@ -459,7 +459,7 @@ namespace OWULRosterServer.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Avatar", DbType="VarChar(100)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Avatar", DbType="VarChar(500)")]
 		public string Avatar
 		{
 			get
@@ -479,8 +479,8 @@ namespace OWULRosterServer.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SkillRating", DbType="Int")]
-		public System.Nullable<int> SkillRating
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SkillRating", DbType="Int NOT NULL")]
+		public int SkillRating
 		{
 			get
 			{
@@ -499,8 +499,8 @@ namespace OWULRosterServer.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AverageKills", DbType="Decimal(18,0)")]
-		public System.Nullable<decimal> AverageKills
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AverageKills", DbType="Decimal(5,2) NOT NULL")]
+		public decimal AverageKills
 		{
 			get
 			{
@@ -519,8 +519,8 @@ namespace OWULRosterServer.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AverageDeaths", DbType="Decimal(18,0)")]
-		public System.Nullable<decimal> AverageDeaths
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AverageDeaths", DbType="Decimal(5,2) NOT NULL")]
+		public decimal AverageDeaths
 		{
 			get
 			{
@@ -539,8 +539,8 @@ namespace OWULRosterServer.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AverageAssists", DbType="Decimal(18,0)")]
-		public System.Nullable<decimal> AverageAssists
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AverageAssists", DbType="Decimal(5,2) NOT NULL")]
+		public decimal AverageAssists
 		{
 			get
 			{

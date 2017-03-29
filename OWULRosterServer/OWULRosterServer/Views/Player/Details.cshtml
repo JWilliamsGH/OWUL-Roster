@@ -1,0 +1,91 @@
+﻿@model OWULRosterServer.Models.PlayerModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PlayerModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BNetTag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BNetTag)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Avatar)
+        </dt>
+
+        <dd>
+            @if (string.IsNullOrEmpty(@Html.DisplayFor(model => model.Avatar).ToString()))
+            {
+                // Use default image
+                <img style="height: 30px; width: 30px;" src=@Url.Content("~/Content/Images/100px-Default.png") ) alt=@Html.DisplayFor(model => model.Avatar) />
+            }
+            else
+            {
+                // Use Avatar image
+                <img style="height: 30px; width: 30px;" src=@Url.Content("~/Content/Images/" + @Html.DisplayFor(model => model.Avatar)) alt=@Html.DisplayFor(model => model.Avatar) />
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkillRating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkillRating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AverageKills)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AverageKills)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AverageDeaths)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AverageDeaths)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AverageAssists)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AverageAssists)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { playerId = Model.PlayerId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

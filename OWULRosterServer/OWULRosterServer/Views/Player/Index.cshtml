@@ -1,0 +1,84 @@
+﻿@model IEnumerable<OWULRosterServer.Models.PlayerModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Avatar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BNetTag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SkillRating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AverageKills)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AverageDeaths)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AverageAssists)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TeamName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td style="vertical-align:middle;">
+            @if (string.IsNullOrEmpty(@Html.DisplayFor(modelItem => item.Avatar).ToString()))
+            {
+                // Use default image
+                <img style="height: 30px; width: 30px;" src=@Url.Content("~/Content/Images/100px-Default.png") ) alt=@Html.DisplayFor(modelItem => item.Avatar) />
+            }
+            else
+            {
+                // Use Avatar image
+                <img style="height: 30px; width: 30px;" src=@Url.Content("~/Content/Images/" + @Html.DisplayFor(modelItem => item.Avatar)) alt=@Html.DisplayFor(modelItem => item.Avatar) />
+            }
+        </td>
+        <td style="vertical-align:middle;">
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td style="vertical-align:middle;">
+            @Html.DisplayFor(modelItem => item.BNetTag)
+        </td>
+        <td style="vertical-align:middle;">
+            @Html.DisplayFor(modelItem => item.SkillRating)
+        </td>
+        <td style="vertical-align:middle;">
+            @Html.DisplayFor(modelItem => item.AverageKills)
+        </td>
+        <td style="vertical-align:middle;">
+            @Html.DisplayFor(modelItem => item.AverageDeaths)
+        </td>
+        <td style="vertical-align:middle;">
+            @Html.DisplayFor(modelItem => item.AverageAssists)
+        </td>
+        <td style="vertical-align:middle;">
+            @Html.DisplayFor(modelItem => item.TeamName)
+        </td>
+        <td style="vertical-align:middle;">
+            @Html.ActionLink("Edit", "Edit", new { playerId=item.PlayerId }) |
+            @Html.ActionLink("Details", "Details", new { playerId = item.PlayerId }) |
+            @Html.ActionLink("Delete", "Delete", new { playerId = item.PlayerId })
+        </td>
+    </tr>
+}
+
+</table>
